@@ -1,0 +1,30 @@
+---
+title: "Lab 3"
+author: "Sam Begley"
+date: "February 19, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+HAPPY <- readRDS('HAPPY.rds')
+library(tidyverse)
+```
+
+#1)  DATA CLEANING
+  
+  
+```{r}
+HAPPY[HAPPY == 'IAP' | HAPPY == 'DK' | HAPPY == 'NA'] <- NA
+HAPPY[HAPPY == '89 OR OLDER'] <- 89
+HAPPY$AGE <- as.numeric(HAPPY$AGE)
+HAPPY$YEAR <- as.numeric(HAPPY$YEAR)
+HAPPY$SEX <- as.factor(HAPPY$SEX)
+HAPPY$MARITAL <- as.factor(HAPPY$MARITAL)
+HAPPY$DEGREE <- as.factor(HAPPY$DEGRE)
+HAPPY$FINRELA <- as.ordered(HAPPY$FINRELA)
+HAPPY$HEALTH <- as.ordered(HAPPY$HEALTH)
+HAPPY$PARTYID <- as.factor(HAPPY$PARTYID)
+HAPPY$POLVIEWS <- as.factor(HAPPY$POLVIEWS)
+HAPPY$HAPPY <- as.ordered(HAPPY$HAPPY)
+```
