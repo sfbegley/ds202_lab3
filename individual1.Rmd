@@ -1,0 +1,57 @@
+---
+title: "Individual1"
+author: "Sam Begley"
+date: "February 28, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+df <- readRDS('HAPPY.rds')
+```
+
+Cleaning: 
+
+```{r}
+df[df == 'IAP' | df == 'DK' | df == 'NA'] <- NA
+df[df == '89 OR OLDER'] <- 89
+df$AGE <- as.numeric(df$AGE)
+df$YEAR <- as.numeric(df$YEAR)
+df$SEX <- as.factor(df$SEX)
+df$MARITAL <- as.factor(df$MARITAL)
+df$DEGREE <- as.factor(df$DEGRE)
+df$FINRELA <- as.ordered(df$FINRELA)
+df$HEALTH <- as.ordered(df$HEALTH)
+df$PARTYID <- as.factor(df$PARTYID)
+df$POLVIEWS <- as.factor(df$POLVIEWS)
+df$HAPPY <- as.ordered(df$HAPPY)
+```
+
+1)
+
+```{r}
+ggplot(df, aes(x = HAPPY)) +
+  geom_bar()
+```
+```{r}
+ggplot(df, aes(x = AGE)) +
+  geom_histogram(binwidth = 5)
+```
+
+2)
+
+```{r}
+ggplot(df, aes(HAPPY, YEAR)) +
+  geom_boxplot()
+```
+```{r}
+ggplot(df, aes(HAPPY, AGE)) +
+  geom_boxplot()
+```
+```{r}
+ggplot(df, aes(HAPPY, HEALTH)) +
+  geom_bin2d()
+```
+
+From the variables I looked at (Age, Year, Health), there were no major correlations with happiness. I believe this may be due to the lack of options for happiness. I think a scale from 1-10 might work better as a measurement of people's happiness.
