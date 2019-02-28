@@ -1,6 +1,6 @@
 ---
 title: "Lab 3"
-author: "Sam Begley"
+author: "Sam Begley, Tim Potter"
 date: "February 19, 2019"
 output: html_document
 ---
@@ -28,3 +28,23 @@ HAPPY$PARTYID <- as.factor(HAPPY$PARTYID)
 HAPPY$POLVIEWS <- as.factor(HAPPY$POLVIEWS)
 HAPPY$HAPPY <- as.ordered(HAPPY$HAPPY)
 ```
+
+#2)  DATA EXPLORATION 
+
+1.
+Looking at the distribution of the marital status of the respondents, the vast majority of those in the data set have been married at least once. Most people are still married, with a fair percentage of people having been divorced or separated. The distribution of the ages of the people surveyed show a sharp rise up until around 30, followed by a steady decline down to 89.
+```{r}
+ggplot(data = HAPPY, aes(x = MARITAL)) + geom_bar()
+ggplot(data =HAPPY, aes(x = AGE)) + geom_histogram(binwidth = 5)
+```
+
+2.Happiness based on several other variables.
+```{r}
+ggplot(data = HAPPY, aes(x = MARITAL, fill = HAPPY)) + geom_bar(position = position_dodge())
+ggplot(data= HAPPY, aes(x = HAPPY, color = HAPPY, fill = HAPPY)) + geom_bar() + facet_wrap(~YEAR)
+ggplot(data= HAPPY, aes(x = HAPPY, y = AGE)) + geom_boxplot() + coord_flip()
+ggplot(data = HAPPY, aes(x = HEALTH, fill = HAPPY)) + geom_bar(position = position_dodge()) + coord_flip()
+```
+
+3. Takeaway
+Looking through the graphs, happiness is obviously affected by other variables, and yet it seems people overall are pretty happy. People who are married have a much greater chance of being very happy, and yet everyone else still has a pretty happy majority. Overs the years, the population has always been either pretty happy or very happy, opposed to not very happy. Age doesn't seem to have an impact on overall happiness. Health does seem to have more of an impact. People with poor health are not happy more than others, while people with excellent health are overall very happy or pretty happy. This goes to show that people will *at least* say they're pretty happy over anything else. 
